@@ -8,7 +8,10 @@ public enum SoundList
     MachineGunSound1,
     MachineGunSound2,
     MachineGunSound3,
-    CannonSound1
+    CannonSound1,
+    BoltCannonSound1,
+    OutOfAmmo,
+    SwitchWeapon
 }
 
 [System.Serializable]

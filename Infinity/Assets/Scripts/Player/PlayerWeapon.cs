@@ -48,7 +48,7 @@ public class PlayerWeapon : MonoBehaviour
         // Cannon
         if (playerWeaponSelection.GetCurrentWeaponID() == 1) {
             firePointRandomAngle.ResetFirePointAngle();
-            if (Input.GetMouseButtonDown(0) && cannonTimer >= cannonCD)
+            if(Input.GetMouseButtonDown(0) && cannonTimer >= cannonCD)
             {
                 AudioManager.instance.Play(SoundList.CannonSound1);
                 GameObject newShell = Instantiate(shell, firePointCannon.transform.position, firePointCannon.transform.rotation);
@@ -57,25 +57,31 @@ public class PlayerWeapon : MonoBehaviour
 
                 cannonTimer = 0f;
             }
+            else if(Input.GetMouseButtonDown(0) && cannonTimer < cannonCD)
+            {
+                AudioManager.instance.Play(SoundList.OutOfAmmo);
+            }
         }
         // Machine Gun
         if (playerWeaponSelection.GetCurrentWeaponID() == 2)
         {
             firePointRandomAngle.RandomProjectile();
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButtonDown(0) && machineGunAmmo <= 0)
             {
-                if(machineGunTimer >= machineGunCD && machineGunAmmo > 0)
-                {
-                    AudioManager.instance.Play(SoundList.MachineGunSound2);
-                    GameObject newBullet = Instantiate(machineGunBullet, firePointMachineGun.transform.position, firePointMachineGun.transform.rotation);
-                    MachineGunAmmo machineGunAmmoScript = newBullet.GetComponent<MachineGunAmmo>();
-                    machineGunAmmoScript.SetProperties(firePointMachineGun);
-                    machineGunAmmoScript.CalculateHitPositionAndDestroyAmmo();
-
-                    machineGunTimer = 0f;
-                    machineGunAmmo--;
-                }
+                AudioManager.instance.Play(SoundList.OutOfAmmo);
             }
+            else if (Input.GetMouseButton(0) && machineGunTimer >= machineGunCD && machineGunAmmo > 0)
+            {
+                AudioManager.instance.Play(SoundList.MachineGunSound2);
+                GameObject newBullet = Instantiate(machineGunBullet, firePointMachineGun.transform.position, firePointMachineGun.transform.rotation);
+                MachineGunAmmo machineGunAmmoScript = newBullet.GetComponent<MachineGunAmmo>();
+                machineGunAmmoScript.SetProperties(firePointMachineGun);
+                machineGunAmmoScript.CalculateHitPositionAndDestroyAmmo();
+
+                machineGunTimer = 0f;
+                machineGunAmmo--;
+            }
+            
         }
     }
 
