@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1252845678370292264}
   - component: {fileID: 1252845678370292267}
   - component: {fileID: 3656577406431205863}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BedRock
   m_TagString: Ground
   m_Icon: {fileID: 0}

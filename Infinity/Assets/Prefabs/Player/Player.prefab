@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4733080095800512446}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FirePoint (Cannon)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 4733080095824475300}
   - component: {fileID: 4733080095824475301}
   - component: {fileID: 4733080095824475302}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 4733080096008104733}
   - component: {fileID: 4733080096008104675}
   - component: {fileID: 4733080096008104732}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Barrel Part1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4733080096351430418}
   - component: {fileID: 4733080096351430417}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FirePoint (Machine gun)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 4733080096467104563}
   - component: {fileID: 4733080096467104560}
   - component: {fileID: 4592953278873168876}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -312,9 +312,13 @@ MonoBehaviour:
   shellSpeed: 90
   cannonCD: 2.8
   machineGunBullet: {fileID: 8875875982527836848, guid: 387a1d92b5fcaee4e9b0a1fb015bebb0, type: 3}
-  machineGunCD: 0.08
+  machineGunCD: 0.1
   machineGunAmmo: 25
   machineGunReloadTime: 4
+  cannon_VFX: {fileID: 0}
+  machineGun_VFX: {fileID: 0}
+  bolt_VFX: {fileID: 0}
+  missile_VFX: {fileID: 0}
   lr: {fileID: 0}
 --- !u!114 &4733080096467104561
 MonoBehaviour:
@@ -481,7 +485,7 @@ GameObject:
   - component: {fileID: 4733080097117849559}
   - component: {fileID: 4733080097117849557}
   - component: {fileID: 4733080097117849558}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Barrel Part2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -560,7 +564,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4733080097204032083}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BarrelCenter
   m_TagString: Untagged
   m_Icon: {fileID: 0}

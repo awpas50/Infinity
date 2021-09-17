@@ -113,17 +113,29 @@ public class SceneCreator : MonoBehaviour
     IEnumerator CreatePillars()
     {
         yield return new WaitForSeconds(0.08f * 33f);
-        for (int i = 0; i < 24; i++)
+        for (int i = 0; i < 6; i++)
         {
+            Debug.Log("DFDF");
             bool canSpawnPillar = false;
             int randomX = Random.Range(1, 17);
             int randomY = Random.Range(1, 17);
-
-            Debug.DrawRay(new Vector3(randomX, 100, randomY), Vector3.down * 10, Color.cyan);
+            
             // Check if there is anything exists / pillar exists
-            if (Physics.Raycast(new Vector3(randomX, 100, randomY), Vector3.down, Mathf.Infinity, LayerMask.GetMask("Ground")))
+            if (Physics.Raycast(new Vector3(randomX, 100, -randomY), Vector3.down, Mathf.Infinity, LayerMask.GetMask("Ground")))
             {
                 canSpawnPillar = true;
+            }
+            if (Physics.Raycast(new Vector3(randomX, 100, -randomY), Vector3.down, Mathf.Infinity, LayerMask.GetMask("Pillar")))
+            {
+                canSpawnPillar = false;
+            }
+            if (Physics.Raycast(new Vector3(randomX, 100, -randomY), Vector3.down, Mathf.Infinity, LayerMask.GetMask("Player")))
+            {
+                canSpawnPillar = false;
+            }
+            if (!Physics.Raycast(new Vector3(randomX, 100, -randomY), Vector3.down, Mathf.Infinity, LayerMask.GetMask("Ground")))
+            {
+                canSpawnPillar = false;
             }
             // Check if bedrock exists
             for (int a = 0; a < 4; a++)
@@ -138,6 +150,7 @@ public class SceneCreator : MonoBehaviour
                 Debug.Log("Pillar " + randomX + " " + randomY);
                 GameObject newStonePillar = Instantiate(stonePillar, new Vector3(randomX, 6f, -randomY), Quaternion.identity);
             }
+            yield return new WaitForSeconds(0.5f);
         }
     }
     IEnumerator ReleasePlayer()

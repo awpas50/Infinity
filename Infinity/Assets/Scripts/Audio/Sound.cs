@@ -11,7 +11,9 @@ public enum SoundList
     CannonSound1,
     BoltCannonSound1,
     OutOfAmmo,
-    SwitchWeapon
+    SwitchWeapon,
+    PlayerBeingHit,
+    EnemyBeingHit
 }
 
 [System.Serializable]

@@ -21,7 +21,13 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private int machineGunAmmo = 30;
     private float machineGunReloadTimer = 0f;
     [SerializeField] private float machineGunReloadTime = 4f;
+    [Header("")]
 
+    [Header("Particle effect")]
+    [SerializeField] private GameObject cannon_VFX;
+    [SerializeField] private GameObject machineGun_VFX;
+    [SerializeField] private GameObject bolt_VFX;
+    [SerializeField] private GameObject missile_VFX;
     [Header("Laser Sight")]
     [SerializeField] private LineRenderer lr;
 
@@ -83,14 +89,29 @@ public class PlayerWeapon : MonoBehaviour
             }
             
         }
+
+        // Bolt cannon
+        if(playerWeaponSelection.GetCurrentWeaponID() == 3)
+        {
+
+        }
     }
 
     void ActivateLaserSight()
     {
         Ray laserSightRay = new Ray(firePointCannon.transform.position, firePointCannon.transform.TransformDirection(Vector3.forward) * 1000);
-        Debug.DrawRay(firePointCannon.transform.position, firePointCannon.transform.TransformDirection(Vector3.forward) * 10, Color.cyan);
-        lr.SetPosition(0, laserSightRay.GetPoint(0));
-        lr.SetPosition(1, laserSightRay.GetPoint(1) + firePointCannon.transform.TransformDirection(Vector3.forward) * 10);
+        RaycastHit hit;
+        if(Physics.Raycast(laserSightRay, out hit))
+        {
+            lr.SetPosition(0, laserSightRay.GetPoint(0));
+            lr.SetPosition(1, hit.point);
+        }
+        else
+        {
+            lr.SetPosition(0, laserSightRay.GetPoint(0));
+            lr.SetPosition(1, laserSightRay.GetPoint(1) + firePointCannon.transform.TransformDirection(Vector3.forward) * 10);
+        }
+        
     }
 
     void CheckMachineGunReload()

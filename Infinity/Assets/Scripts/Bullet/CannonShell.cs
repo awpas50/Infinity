@@ -17,4 +17,19 @@ public class CannonShell : MonoBehaviour
         Destroy(gameObject, 10f);
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag != "Player")
+        {
+            StartCoroutine(PlaySoundWithDelay(0.1f));
+            Destroy(gameObject, 0.05f);
+        }
+    }
+
+    IEnumerator PlaySoundWithDelay(float time)
+    {
+        yield return new WaitForSeconds(time);
+        AudioManager.instance.Play(SoundList.EnemyBeingHit);
+    }
 }

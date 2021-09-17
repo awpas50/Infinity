@@ -21,8 +21,10 @@ public class MachineGunAmmo : MonoBehaviour
         RaycastHit hit;
         Vector3 start = firePoint.transform.position;
         Vector3 end = firePoint.transform.TransformDirection(Vector3.forward);
+        // If hit aything
         if (Physics.Raycast(start, end * 10, out hit))
         {
+            AudioManager.instance.Play(SoundList.EnemyBeingHit);
             lr.SetPosition(0, transform.position);
             lr.SetPosition(1, hit.point);
         }

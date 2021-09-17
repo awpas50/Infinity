@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PliiarProperties : MonoBehaviour
+public class PillarProperties : MonoBehaviour
 {
     Rigidbody rb;
     GameObject attachedGroundTile;
