@@ -315,8 +315,9 @@ MonoBehaviour:
   machineGunCD: 0.1
   machineGunAmmo: 25
   machineGunReloadTime: 4
-  cannon_VFX: {fileID: 0}
-  machineGun_VFX: {fileID: 0}
+  cannon_VFX1: {fileID: 6617946253261780701, guid: 1961db358262a0b40a822638460a275c, type: 3}
+  cannon_VFX2: {fileID: 6617946253261780701, guid: 1961db358262a0b40a822638460a275c, type: 3}
+  machineGun_VFX: {fileID: 7140564381345919615, guid: f5b247cda0ac72c4c89fd8db76d8b7db, type: 3}
   bolt_VFX: {fileID: 0}
   missile_VFX: {fileID: 0}
   lr: {fileID: 0}
@@ -412,8 +413,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.03262329
-        value: 0.040267944
+        time: 0.039596558
+        value: 0.18660736
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -425,9 +426,9 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 1, g: 1, b: 1, a: 0.64705884}
+      key1: {r: 1, g: 1, b: 1, a: 0.64705884}
+      key2: {r: 0, g: 0, b: 0, a: 0.21568628}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -442,8 +443,8 @@ LineRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 65535
-      atime2: 0
+      atime1: 64571
+      atime2: 65535
       atime3: 0
       atime4: 0
       atime5: 0
@@ -451,7 +452,7 @@ LineRenderer:
       atime7: 0
       m_Mode: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 2
+      m_NumAlphaKeys: 3
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0

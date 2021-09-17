@@ -24,7 +24,8 @@ public class PlayerWeapon : MonoBehaviour
     [Header("")]
 
     [Header("Particle effect")]
-    [SerializeField] private GameObject cannon_VFX;
+    [SerializeField] private GameObject cannon_VFX1;
+    [SerializeField] private GameObject cannon_VFX2;
     [SerializeField] private GameObject machineGun_VFX;
     [SerializeField] private GameObject bolt_VFX;
     [SerializeField] private GameObject missile_VFX;
@@ -62,6 +63,10 @@ public class PlayerWeapon : MonoBehaviour
                 cannonShellScript.SetProperties(shellSpeed);
 
                 cannonTimer = 0f;
+
+                GameObject newVFX = Instantiate(cannon_VFX1, firePointCannon.transform.position, firePointCannon.transform.rotation);
+                newVFX.transform.SetParent(firePointCannon.transform);
+                Destroy(newVFX, 2f);
             }
             else if(Input.GetMouseButtonDown(0) && cannonTimer < cannonCD)
             {
@@ -86,8 +91,11 @@ public class PlayerWeapon : MonoBehaviour
 
                 machineGunTimer = 0f;
                 machineGunAmmo--;
+
+                GameObject newVFX = Instantiate(machineGun_VFX, firePointMachineGun.transform.position, firePointMachineGun.transform.rotation);
+                newVFX.transform.SetParent(firePointMachineGun.transform);
+                Destroy(newVFX, 2f);
             }
-            
         }
 
         // Bolt cannon
