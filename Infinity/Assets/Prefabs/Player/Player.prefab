@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4733080095800512447}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.58}
+  m_LocalPosition: {x: 0, y: 0, z: 1.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4733080096008104733}
@@ -143,6 +143,7 @@ Transform:
   - {fileID: 4733080097117849559}
   - {fileID: 4733080095800512446}
   - {fileID: 4733080096351430418}
+  - {fileID: 3042617447295821936}
   m_Father: {fileID: 4733080097204032083}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -315,10 +316,17 @@ MonoBehaviour:
   machineGunCD: 0.1
   machineGunAmmo: 25
   machineGunReloadTime: 4
+  boltShell: {fileID: 6586890780404659682, guid: b4180a54b1fc42b4791f7cfaa511e5d4, type: 3}
+  boltShellSpeed: 270
+  chargeTime: 2
+  boltCannonCD: 1.8
   cannon_VFX1: {fileID: 6617946253261780701, guid: 1961db358262a0b40a822638460a275c, type: 3}
-  cannon_VFX2: {fileID: 6617946253261780701, guid: 1961db358262a0b40a822638460a275c, type: 3}
-  machineGun_VFX: {fileID: 7140564381345919615, guid: f5b247cda0ac72c4c89fd8db76d8b7db, type: 3}
-  bolt_VFX: {fileID: 0}
+  cannon_VFX2: {fileID: 4327785568069869699, guid: 9709f06f3f1646a468802b7f1a0a494d, type: 3}
+  machineGun_VFX_origin: {fileID: 7140564381345919615, guid: f5b247cda0ac72c4c89fd8db76d8b7db, type: 3}
+  machineGun_VFX_fly: {fileID: 5244038802368468278, guid: 99a704891e3aac2408f167b557a71d17, type: 3}
+  machineGun_VFX_hit: {fileID: 5244038802368468278, guid: a2cb5e7c324e84a4ab07813387125903, type: 3}
+  boltCannon_VFX1: {fileID: 6617946253261780701, guid: 1961db358262a0b40a822638460a275c, type: 3}
+  boltCannon_VFX2: {fileID: 4327785568069869699, guid: 9709f06f3f1646a468802b7f1a0a494d, type: 3}
   missile_VFX: {fileID: 0}
   lr: {fileID: 0}
 --- !u!114 &4733080096467104561
@@ -587,3 +595,46 @@ Transform:
   m_Father: {fileID: 4733080096467104558}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5204429061915993160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3042617447295821936}
+  - component: {fileID: 2522958002773353059}
+  m_Layer: 8
+  m_Name: FirePoint (Missile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3042617447295821936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5204429061915993160}
+  m_LocalRotation: {x: -0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 0.55, z: -0.62}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4733080096008104733}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: -45, y: 0, z: 0}
+--- !u!114 &2522958002773353059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5204429061915993160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 035e53d465dbd30468a8df18088813cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

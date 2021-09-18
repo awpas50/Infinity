@@ -21,13 +21,22 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private int machineGunAmmo = 30;
     private float machineGunReloadTimer = 0f;
     [SerializeField] private float machineGunReloadTime = 4f;
-    [Header("")]
+    [Header("Bolt Cannon")]
+    [SerializeField] private GameObject boltShell;
+    [SerializeField] private float boltShellSpeed;
+    [SerializeField] private float chargeTime = 2f;
+    private float chargeTimer;
+    [SerializeField] private float boltCannonCD = 2f;
+    private float boltCannonTimer = 0f;
 
     [Header("Particle effect")]
     [SerializeField] private GameObject cannon_VFX1;
     [SerializeField] private GameObject cannon_VFX2;
-    [SerializeField] private GameObject machineGun_VFX;
-    [SerializeField] private GameObject bolt_VFX;
+    [SerializeField] private GameObject machineGun_VFX_origin;
+    [SerializeField] private GameObject machineGun_VFX_fly;
+    [SerializeField] private GameObject machineGun_VFX_hit;
+    [SerializeField] private GameObject boltCannon_VFX1;
+    [SerializeField] private GameObject boltCannon_VFX2;
     [SerializeField] private GameObject missile_VFX;
     [Header("Laser Sight")]
     [SerializeField] private LineRenderer lr;
@@ -38,6 +47,7 @@ public class PlayerWeapon : MonoBehaviour
 
         cannonTimer = cannonCD;
         machineGunTimer = machineGunCD;
+        boltCannonTimer = boltCannonCD;
 
         lr = GetComponent<LineRenderer>();
         lr.useWorldSpace = true;
@@ -47,6 +57,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         cannonTimer += Time.deltaTime;
         machineGunTimer += Time.deltaTime;
+        boltCannonTimer += Time.deltaTime;
 
         ActivateLaserSight();
         CheckMachineGunReload();
@@ -66,7 +77,10 @@ public class PlayerWeapon : MonoBehaviour
 
                 GameObject newVFX = Instantiate(cannon_VFX1, firePointCannon.transform.position, firePointCannon.transform.rotation);
                 newVFX.transform.SetParent(firePointCannon.transform);
-                Destroy(newVFX, 2f);
+                Destroy(newVFX, 4f);
+
+                GameObject newVFX2 = Instantiate(cannon_VFX2, firePointCannon.transform.position, firePointCannon.transform.rotation);
+                Destroy(newVFX2, 4f);
             }
             else if(Input.GetMouseButtonDown(0) && cannonTimer < cannonCD)
             {
@@ -86,20 +100,51 @@ public class PlayerWeapon : MonoBehaviour
                 AudioManager.instance.Play(SoundList.MachineGunSound2);
                 GameObject newBullet = Instantiate(machineGunBullet, firePointMachineGun.transform.position, firePointMachineGun.transform.rotation);
                 MachineGunAmmo machineGunAmmoScript = newBullet.GetComponent<MachineGunAmmo>();
-                machineGunAmmoScript.SetProperties(firePointMachineGun);
+
+                GameObject newVFX = Instantiate(machineGun_VFX_origin, firePointMachineGun.transform.position, firePointMachineGun.transform.rotation);
+                newVFX.transform.SetParent(firePointMachineGun.transform);
+                Destroy(newVFX, 3f);
+
+                GameObject newVFX2 = Instantiate(machineGun_VFX_fly, firePointMachineGun.transform.position, firePointMachineGun.transform.rotation);
+                Destroy(newVFX2, 3f);
+
+                GameObject newVFX3 = Instantiate(machineGun_VFX_hit, firePointMachineGun.transform.position, firePointMachineGun.transform.rotation);
+                Destroy(newVFX3, 3f);
+
+                machineGunAmmoScript.SetProperties(firePointMachineGun, newVFX2, newVFX3);
                 machineGunAmmoScript.CalculateHitPositionAndDestroyAmmo();
 
                 machineGunTimer = 0f;
                 machineGunAmmo--;
-
-                GameObject newVFX = Instantiate(machineGun_VFX, firePointMachineGun.transform.position, firePointMachineGun.transform.rotation);
-                newVFX.transform.SetParent(firePointMachineGun.transform);
-                Destroy(newVFX, 2f);
             }
         }
 
         // Bolt cannon
         if(playerWeaponSelection.GetCurrentWeaponID() == 3)
+        {
+            firePointRandomAngle.ResetFirePointAngle();
+            if (Input.GetMouseButtonDown(0) && boltCannonTimer >= boltCannonCD)
+            {
+                AudioManager.instance.Play(SoundList.BoltCannonSound1);
+                GameObject newboltShell = Instantiate(boltShell, firePointCannon.transform.position, firePointCannon.transform.rotation);
+                BoltCannonShell boltCannonShellScript = newboltShell.GetComponent<BoltCannonShell>();
+                boltCannonShellScript.SetProperties(boltShellSpeed);
+
+                boltCannonTimer = 0f;
+
+                GameObject newVFX = Instantiate(boltCannon_VFX1, firePointCannon.transform.position, firePointCannon.transform.rotation);
+                newVFX.transform.SetParent(firePointCannon.transform);
+                Destroy(newVFX, 4f);
+
+                GameObject newVFX2 = Instantiate(boltCannon_VFX2, firePointCannon.transform.position, firePointCannon.transform.rotation);
+                Destroy(newVFX2, 4f);
+            }
+            else if (Input.GetMouseButtonDown(0) && boltCannonTimer < boltCannonCD)
+            {
+                AudioManager.instance.Play(SoundList.OutOfAmmo);
+            }
+        }
+        if (playerWeaponSelection.GetCurrentWeaponID() == 4)
         {
 
         }
@@ -117,7 +162,7 @@ public class PlayerWeapon : MonoBehaviour
         else
         {
             lr.SetPosition(0, laserSightRay.GetPoint(0));
-            lr.SetPosition(1, laserSightRay.GetPoint(1) + firePointCannon.transform.TransformDirection(Vector3.forward) * 10);
+            lr.SetPosition(1, laserSightRay.GetPoint(1) + firePointCannon.transform.TransformDirection(Vector3.forward) * 6);
         }
         
     }
