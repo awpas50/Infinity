@@ -12,6 +12,7 @@ public class PlayerWeapon : MonoBehaviour
     [Header("Cannon")]
     [SerializeField] private GameObject shell;
     [SerializeField] private float shellSpeed;
+    [SerializeField] private float shellDamage = 50f;
     private float cannonTimer = 0f;
     [SerializeField] private float cannonCD = 2f;
     [Header("Machine gun")]
@@ -21,6 +22,7 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private int machineGunAmmo = 30;
     private float machineGunReloadTimer = 0f;
     [SerializeField] private float machineGunReloadTime = 4f;
+    [SerializeField] private float machineGunDamage = 7f;
     [Header("Bolt Cannon")]
     [SerializeField] private GameObject boltShell;
     [SerializeField] private float boltShellSpeed;
@@ -28,15 +30,18 @@ public class PlayerWeapon : MonoBehaviour
     private float chargeTimer;
     [SerializeField] private float boltCannonCD = 2f;
     private float boltCannonTimer = 0f;
+    [SerializeField] private float boltShellDamage = 75f;
 
     [Header("Particle effect")]
     [SerializeField] private GameObject cannon_VFX1;
     [SerializeField] private GameObject cannon_VFX2;
+    [SerializeField] private GameObject cannon_hit;
     [SerializeField] private GameObject machineGun_VFX_origin;
     [SerializeField] private GameObject machineGun_VFX_fly;
     [SerializeField] private GameObject machineGun_VFX_hit;
     [SerializeField] private GameObject boltCannon_VFX1;
     [SerializeField] private GameObject boltCannon_VFX2;
+    [SerializeField] private GameObject boltCannon_hit;
     [SerializeField] private GameObject missile_VFX;
     [Header("Laser Sight")]
     [SerializeField] private LineRenderer lr;
@@ -71,7 +76,7 @@ public class PlayerWeapon : MonoBehaviour
                 AudioManager.instance.Play(SoundList.CannonSound1);
                 GameObject newShell = Instantiate(shell, firePointCannon.transform.position, firePointCannon.transform.rotation);
                 CannonShell cannonShellScript = newShell.GetComponent<CannonShell>();
-                cannonShellScript.SetProperties(shellSpeed);
+                cannonShellScript.SetProperties(shellSpeed, shellDamage, cannon_hit);
 
                 cannonTimer = 0f;
 
@@ -111,7 +116,7 @@ public class PlayerWeapon : MonoBehaviour
                 GameObject newVFX3 = Instantiate(machineGun_VFX_hit, firePointMachineGun.transform.position, firePointMachineGun.transform.rotation);
                 Destroy(newVFX3, 3f);
 
-                machineGunAmmoScript.SetProperties(firePointMachineGun, newVFX2, newVFX3);
+                machineGunAmmoScript.SetProperties(firePointMachineGun, newVFX2, newVFX3, machineGunDamage);
                 machineGunAmmoScript.CalculateHitPositionAndDestroyAmmo();
 
                 machineGunTimer = 0f;
@@ -128,7 +133,7 @@ public class PlayerWeapon : MonoBehaviour
                 AudioManager.instance.Play(SoundList.BoltCannonSound1);
                 GameObject newboltShell = Instantiate(boltShell, firePointCannon.transform.position, firePointCannon.transform.rotation);
                 BoltCannonShell boltCannonShellScript = newboltShell.GetComponent<BoltCannonShell>();
-                boltCannonShellScript.SetProperties(boltShellSpeed);
+                boltCannonShellScript.SetProperties(boltShellSpeed, boltShellDamage, boltCannon_hit);
 
                 boltCannonTimer = 0f;
 

@@ -4,19 +4,34 @@ using UnityEngine;
 
 public class PillarProperties : MonoBehaviour
 {
+    private float initial_HP;
+    public float HP;
+
     Rigidbody rb;
     GameObject attachedGroundTile;
     bool isTouchedGround = false;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        initial_HP = HP;
     }
-    
+
+    public void TakeDamage(float damage)
+    {
+        HP -= damage;
+        if (HP <= 0)
+        {
+            Destroy(gameObject, 0.15f);
+        }
+    }
+
     void Update()
     {
         if (!attachedGroundTile && isTouchedGround)
         {
-            gameObject.AddComponent<Rigidbody>();
+            Rigidbody new_rb = gameObject.AddComponent<Rigidbody>();
+            new_rb.isKinematic = false;
+            new_rb.useGravity = true;
         }
     }
 
@@ -26,7 +41,8 @@ public class PillarProperties : MonoBehaviour
         {
             isTouchedGround = true;
             attachedGroundTile = collision.collider.gameObject;
-            Destroy(rb);
+            rb.isKinematic = true;
+            rb.useGravity = false;
         }
     }
 }

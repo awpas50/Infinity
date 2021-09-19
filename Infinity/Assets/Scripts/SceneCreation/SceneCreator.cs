@@ -6,7 +6,7 @@ public class SceneCreator : MonoBehaviour
 {
     [SerializeField] private GameObject cubeList;
     [Header("Things to spawn")]
-    [SerializeField] private GameObject cube;
+    [SerializeField] private GameObject[] grasses = new GameObject[5];
     [SerializeField] private GameObject rock;
     [SerializeField] private GameObject bedRock;
     [SerializeField] private GameObject stonePillar;
@@ -14,6 +14,8 @@ public class SceneCreator : MonoBehaviour
 
     public int[,] gridToDelete;
     public int[,] bedRockPos;
+
+    private int bedrockNum = 1;
 
     private void Start()
     {
@@ -34,10 +36,12 @@ public class SceneCreator : MonoBehaviour
     }
     IEnumerator CreateGrid()
     {
+        
         for (int i = 0; i < 17; i++)
         {
             int x = 0;
             int y = i;
+            
             for (int j = 0; j < i + 1; j++)
             {
                 bool isBedRock = false;
@@ -50,7 +54,8 @@ public class SceneCreator : MonoBehaviour
                 }
                 if(!isBedRock)
                 {
-                    GameObject newBlock = Instantiate(cube, cubeList.transform.position + new Vector3(x, 0, -y), Quaternion.identity);
+                    int seed = Random.Range(0, 5);
+                    GameObject newBlock = Instantiate(grasses[seed], cubeList.transform.position + new Vector3(x, 0, -y), Quaternion.identity);
 
                     GridProperties gridProperties = newBlock.GetComponent<GridProperties>();
                     gridProperties.blockCreator = GetComponent<SceneCreator>();
@@ -63,16 +68,37 @@ public class SceneCreator : MonoBehaviour
                 }
                 else if(isBedRock)
                 {
+                    
                     GameObject newBedRock = Instantiate(bedRock, cubeList.transform.position + new Vector3(x, 0, -y), Quaternion.identity);
-
                     GridProperties gridProperties = newBedRock.GetComponent<GridProperties>();
                     gridProperties.blockCreator = GetComponent<SceneCreator>();
                     newBedRock.transform.SetParent(cubeList.transform);
                     gridProperties.x = x;
                     gridProperties.y = y;
                     gridProperties.RunPositionCheck();
+                    
+                    if (bedrockNum == 1)
+                    {
+                        //Quaternion initialRot = newBedRock.transform.rotation;
+                        //newBedRock.transform.rotation = Quaternion.Euler(0, 270, 0);
+                        //newBedRock.transform.rotation = Quaternion.identity * Quaternion.Euler(0, 270, 0);
+                        newBedRock.transform.GetChild(0).rotation = Quaternion.Euler(0, 270, 0);
+                    }
+                    if (bedrockNum == 2)
+                    {
+                        newBedRock.transform.GetChild(0).rotation = Quaternion.Euler(0, 180, 0);
+                    }
+                    if (bedrockNum == 3)
+                    {
+                        newBedRock.transform.GetChild(0).rotation = Quaternion.Euler(0, 0, 0);
+                    }
+                    if (bedrockNum == 4)
+                    {
+                        newBedRock.transform.GetChild(0).rotation = Quaternion.Euler(0, 90, 0);
+                    }
                     x++;
                     y--;
+                    bedrockNum++;
                 }
                 
                 //Debug.Log("(" + x + "," + y + ")");
@@ -85,7 +111,9 @@ public class SceneCreator : MonoBehaviour
             int y = 17 - 1;
             for (int j = 0; j < 17 - 1 - i; j++)
             {
-                GameObject newBlock = Instantiate(cube, cubeList.transform.position + new Vector3(x, 0, -y), Quaternion.identity);
+                int seed = Random.Range(0, 5);
+                GameObject newBlock = Instantiate(grasses[seed], cubeList.transform.position + new Vector3(x, 0, -y), Quaternion.identity);
+
                 GridProperties gridProperties = newBlock.GetComponent<GridProperties>();
                 gridProperties.blockCreator = GetComponent<SceneCreator>();
                 newBlock.transform.SetParent(cubeList.transform);
@@ -156,6 +184,11 @@ public class SceneCreator : MonoBehaviour
     IEnumerator ReleasePlayer()
     {
         yield return new WaitForSeconds(0.08f * 33f);
-        GameObject newPlayer = Instantiate(player, new Vector3(6.5f, 6f, -6.5f), Quaternion.identity);
+        //GameObject newPlayer = Instantiate(player, new Vector3(6.5f, 6f, -6.5f), Quaternion.identity);
+    }
+    IEnumerator ReleaseEnemy()
+    {
+        yield return new WaitForSeconds(0.08f * 33f);
+        //GameObject newPlayer = Instantiate(player, new Vector3(6.5f, 6f, -6.5f), Quaternion.identity);
     }
 }

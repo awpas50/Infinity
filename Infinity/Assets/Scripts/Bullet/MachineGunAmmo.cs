@@ -7,6 +7,7 @@ public class MachineGunAmmo : MonoBehaviour
     private GameObject firePoint;
     private GameObject machineGun_VFX_fly;
     private GameObject machineGun_VFX_hit;
+    private float damage;
     [SerializeField] private LineRenderer lr;
     RaycastHit hit;
     private void Start()
@@ -14,11 +15,12 @@ public class MachineGunAmmo : MonoBehaviour
         lr = GetComponent<LineRenderer>();
         lr.useWorldSpace = true;
     }
-    public void SetProperties(GameObject firePoint, GameObject machineGun_VFX_fly, GameObject machineGun_VFX_hit)
+    public void SetProperties(GameObject firePoint, GameObject machineGun_VFX_fly, GameObject machineGun_VFX_hit, float damage)
     {
         this.firePoint = firePoint;
         this.machineGun_VFX_fly = machineGun_VFX_fly;
         this.machineGun_VFX_hit = machineGun_VFX_hit;
+        this.damage = damage;
     }
     public void CalculateHitPositionAndDestroyAmmo()
     {
@@ -28,9 +30,21 @@ public class MachineGunAmmo : MonoBehaviour
         // If hit aything
         if (Physics.Raycast(start, end * 100, out hit))
         {
+            if (hit.transform.gameObject.tag == "Enemy")
+            {
+                EnemyStat enemyStat = hit.transform.gameObject.GetComponent<EnemyStat>();
+                enemyStat.TakeDamage(damage);
+            }
+            if (hit.transform.gameObject.tag == "Pillar")
+            {
+                PillarProperties pillarProperties = hit.transform.gameObject.GetComponent<PillarProperties>();
+                pillarProperties.TakeDamage(damage);
+            }
+
             AudioManager.instance.Play(SoundList.EnemyBeingHit);
             lr.SetPosition(0, transform.position);
             lr.SetPosition(1, hit.point);
+            Destroy(machineGun_VFX_fly, 0.02f);
         }
         else
         {
