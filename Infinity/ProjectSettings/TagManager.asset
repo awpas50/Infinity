@@ -7,6 +7,9 @@ TagManager:
   - Ground
   - Pillar
   - Enemy
+  - Boss
+  - Boundary
+  - PlayerHealthBar
   layers:
   - Default
   - TransparentFX
@@ -18,9 +21,9 @@ TagManager:
   - Pillar
   - Player
   - Enemy
-  - 
-  - 
-  - 
+  - Boss
+  - PlayerBullet
+  - EnemyBullet
   - 
   - 
   - 

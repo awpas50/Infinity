@@ -35,11 +35,22 @@ public class MachineGunAmmo : MonoBehaviour
                 EnemyStat enemyStat = hit.transform.gameObject.GetComponent<EnemyStat>();
                 enemyStat.TakeDamage(damage);
             }
+            if (hit.transform.gameObject.tag == "Boss")
+            {
+                EnemyStat enemyStat = hit.transform.gameObject.GetComponent<EnemyStat>();
+                enemyStat.TakeDamage(damage);
+            }
             if (hit.transform.gameObject.tag == "Pillar")
             {
                 PillarProperties pillarProperties = hit.transform.gameObject.GetComponent<PillarProperties>();
                 pillarProperties.TakeDamage(damage);
+                pillarProperties.pillarHealthBar.SetAlpha();
             }
+            //if (hit.transform.gameObject.tag == "Player")
+            //{
+            //    PlayerStat playerStat = hit.transform.gameObject.GetComponent<PlayerStat>();
+            //    playerStat.TakeDamage(damage);
+            //}
 
             AudioManager.instance.Play(SoundList.EnemyBeingHit);
             lr.SetPosition(0, transform.position);

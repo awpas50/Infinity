@@ -16,7 +16,7 @@ public class FirePointRandomAngle : MonoBehaviour
     {
         transform.localEulerAngles = new Vector3(
             0,
-            Random.Range(-8f, 8f),
+            Random.Range(-10f, 10f),
             0
         );
     }

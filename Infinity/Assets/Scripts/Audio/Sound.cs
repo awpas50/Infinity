@@ -13,7 +13,13 @@ public enum SoundList
     OutOfAmmo,
     SwitchWeapon,
     PlayerBeingHit,
-    EnemyBeingHit
+    EnemyBeingHit,
+    Spawn,
+    EnemyCannonSound1,
+    ObjectDestroyed1,
+    ObjectDestroyed2,
+    ObjectDestroyed3,
+    BossShoot
 }
 
 [System.Serializable]

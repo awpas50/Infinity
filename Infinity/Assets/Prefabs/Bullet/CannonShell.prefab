@@ -946,7 +946,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 300
+      scalar: 150
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5750,7 +5750,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 200
+      scalar: 100
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -9703,7 +9703,7 @@ GameObject:
   - component: {fileID: 6586890780404659681}
   - component: {fileID: 6586890780404659693}
   - component: {fileID: 4055138475089637222}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CannonShell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10682,7 +10682,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 300
+      scalar: 150
       minScalar: 10
       maxCurve:
         serializedVersion: 2

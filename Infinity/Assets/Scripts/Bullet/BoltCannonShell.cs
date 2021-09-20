@@ -52,15 +52,32 @@ public class BoltCannonShell : MonoBehaviour
             GameObject VFXhit = Instantiate(boltCannonHitVFX, transform.position, Quaternion.identity);
             Destroy(VFXhit, 2f);
         }
+        if (other.gameObject.tag == "Boss")
+        {
+            EnemyStat enemyStat = other.gameObject.GetComponent<EnemyStat>();
+            enemyStat.TakeDamage(damage);
+
+            GameObject VFXhit = Instantiate(boltCannonHitVFX, transform.position, Quaternion.identity);
+            Destroy(VFXhit, 2f);
+        }
         if (other.gameObject.tag == "Pillar")
         {
             PillarProperties pillarProperties = other.gameObject.GetComponent<PillarProperties>();
             pillarProperties.TakeDamage(damage);
+            pillarProperties.pillarHealthBar.SetAlpha();
             //Destroy(gameObject);
 
             GameObject VFXhit = Instantiate(boltCannonHitVFX, transform.position, Quaternion.identity);
             Destroy(VFXhit, 2f);
         }
+        //if (other.gameObject.tag == "Player")
+        //{
+        //    PlayerStat playerStat = other.gameObject.GetComponent<PlayerStat>();
+        //    playerStat.TakeDamage(damage);
+
+        //    GameObject VFXhit = Instantiate(boltCannonHitVFX, transform.position, Quaternion.identity);
+        //    Destroy(VFXhit, 2f);
+        //}
     }
 
     IEnumerator PlaySoundWithDelay(float time)

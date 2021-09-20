@@ -43,15 +43,36 @@ public class CannonShell : MonoBehaviour
             GameObject VFXhit = Instantiate(cannonHitVFX, transform.position, Quaternion.identity);
             Destroy(VFXhit, 2f);
         }
+        if (other.gameObject.tag == "Boss")
+        {
+            EnemyStat enemyStat = other.gameObject.GetComponent<EnemyStat>();
+            enemyStat.TakeDamage(damage);
+
+            Destroy(gameObject);
+
+            GameObject VFXhit = Instantiate(cannonHitVFX, transform.position, Quaternion.identity);
+            Destroy(VFXhit, 2f);
+        }
         if (other.gameObject.tag == "Pillar")
         {
             PillarProperties pillarProperties = other.gameObject.GetComponent<PillarProperties>();
             pillarProperties.TakeDamage(damage);
+            pillarProperties.pillarHealthBar.SetAlpha();
 
             Destroy(cannonVFX, 0.2f);
             cannonVFX.transform.parent = null;
             
             StartCoroutine(PlaySoundWithDelay(0.1f));
+            Destroy(gameObject);
+
+            GameObject VFXhit = Instantiate(cannonHitVFX, transform.position, Quaternion.identity);
+            Destroy(VFXhit, 2f);
+        }
+        if (other.gameObject.tag == "Player")
+        {
+            PlayerStat playerStat = other.gameObject.GetComponent<PlayerStat>();
+            playerStat.TakeDamage(damage);
+
             Destroy(gameObject);
 
             GameObject VFXhit = Instantiate(cannonHitVFX, transform.position, Quaternion.identity);
